@@ -66,11 +66,10 @@ namespace TravelWeather
             weatherPictureBoxList.ElementAt(column).Image = weatherSymbol[wm.getWeatherString()];
             weatherPictureBoxList.ElementAt(column).SizeMode = PictureBoxSizeMode.Zoom;
 
-
-                temperatureMinLabelList.ElementAt(column).Text = wm.temperatureMin.ToString("N0") + " °C";
-                temperatureMaxLabelList.ElementAt(column).Text = wm.temperatureMax.ToString("N0") + " °C";
-                cloudynessLabelList.ElementAt(column).Text = wm.cloudyness.ToString("N0") + " %";
-                precipitationLabelList.ElementAt(column).Text = wm.getPrecipitationString();
+            temperatureMinLabelList.ElementAt(column).Text = wm.temperatureMin.ToString("N0") + " °C";
+            temperatureMaxLabelList.ElementAt(column).Text = wm.temperatureMax.ToString("N0") + " °C";
+            cloudynessLabelList.ElementAt(column).Text = wm.cloudyness.ToString("N0") + " %";
+            precipitationLabelList.ElementAt(column).Text = wm.precipitation.ToString("N1") + " mm";
         }
 
 
@@ -81,7 +80,7 @@ namespace TravelWeather
             aDirector.WeatherReady += new ChangedEventHandler(paintWeather);
 
             List<String> locationDefault = new List<String>(){
-            "Magdeburg", "Berlin", "Frankfurt", "New York", "Sydney", "Paris","Heidelberg"
+            "Magdeburg", "Berlin", "Frankfurt", "New York", "Sydney", "Paris","Mannheim"
             };
 
             tableRowCaptions = new List<String>(){
