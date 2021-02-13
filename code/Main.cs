@@ -48,8 +48,8 @@ namespace TravelWeather
             aDirector.setWeatherSource((director.weatherSourceType)comboBox_weatherSource.SelectedIndex);
             aDirector.setLocationFinder((director.locationFinderType)comboBox_locationSource.SelectedIndex);
             aDirector.setCalendarSource((director.calendarType)comboBox_calendarSource.SelectedIndex);
-            aDirector.parseLocation(this.getManualLocations());
-            aDirector.parseWeather();
+            aDirector.parseLocations(this.getManualLocations());
+            aDirector.readWeather();
 
             Dictionary<DateTime, WeatherModel> dateAndWeather = aDirector.getWeather();
             int count = 0;

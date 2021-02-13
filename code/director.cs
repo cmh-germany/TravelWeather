@@ -89,15 +89,15 @@ namespace TravelWeather
 
 
 
-        public WeatherModel readWeather(Location loc)
+        public WeatherModel readWeather(Location loc, DateTime date)
         {
-            WeatherDataSourceOpenWeatherMap wm = new WeatherDataSourceOpenWeatherMap(loc.getCityName());
+            WeatherDataSourceOpenWeatherMap wm = new WeatherDataSourceOpenWeatherMap(loc, date);
             wm.parseWeatherData();
             return wm.getWeatherModel();
         }
 
         //First determine location (that might be ambigous), then read weather
-        public void parseLocation(Dictionary<DateTime, String> dateAndlocationString)
+        public void parseLocations(Dictionary<DateTime, String> dateAndlocationString)
         {
             _dateAndFoundLocation = new Dictionary<DateTime, Location>();
             string lastEntry = "";
@@ -113,25 +113,26 @@ namespace TravelWeather
                 }
                 lastEntry = kvp.Value;
             }
-
-            //this.readWeather(dateAndFoundLocation);
         }
 
         //Read weather from known location
-        public void parseWeather()
+        public void readWeather()
         {
-            _dateAndWeather = new Dictionary<DateTime,WeatherModel>();
+            _dateAndWeather = new Dictionary<DateTime, WeatherModel>();
             foreach (KeyValuePair<DateTime, Location> kvp in _dateAndFoundLocation)
             {
                 //then: read weather based on location
+                DateTime date = kvp.Key;
                 Location curLocation = kvp.Value;
                 if (curLocation != null)
                 {
-                    WeatherModel curWeather = this.readWeather(curLocation);
-                    if (curWeather != null){
-                        _dateAndWeather.Add(kvp.Key, curWeather);
+                    WeatherModel curWeather = this.readWeather(curLocation, date);
+                    if (curWeather != null)
+                    {
+                        _dateAndWeather.Add(date, curWeather);
                     }
-                    else {
+                    else
+                    {
                         Console.Out.WriteLine("weather for location " + curLocation.ToString() + " not found");
                         _dateAndWeather.Add(kvp.Key, null);
                     }
