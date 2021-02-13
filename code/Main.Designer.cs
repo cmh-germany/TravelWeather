@@ -52,13 +52,7 @@
             this.comboBox_weatherSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_weatherSource.FormattingEnabled = true;
             this.comboBox_weatherSource.Items.AddRange(new object[] {
-            "Weather Underground",
-            "OpenWeatherMap",
-            "The Weather Channel",
-            "World Weather Online",
-            "Yahoo Weather",
-            "Wetter.com",
-            "Norwegian Meteorological Institute"});
+            "OpenWeatherMap"});
             this.comboBox_weatherSource.Location = new System.Drawing.Point(96, 45);
             this.comboBox_weatherSource.Name = "comboBox_weatherSource";
             this.comboBox_weatherSource.Size = new System.Drawing.Size(157, 21);
@@ -102,7 +96,7 @@
             this.button_getWeather.Name = "button_getWeather";
             this.button_getWeather.Size = new System.Drawing.Size(132, 33);
             this.button_getWeather.TabIndex = 5;
-            this.button_getWeather.Text = "get weather";
+            this.button_getWeather.Text = "Get weather";
             this.button_getWeather.UseVisualStyleBackColor = true;
             this.button_getWeather.Click += new System.EventHandler(this.button_getWeather_Click);
             // 
@@ -115,6 +109,7 @@
             this.label9.Size = new System.Drawing.Size(87, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "Calendar source:";
+            this.label9.Visible = false;
             // 
             // comboBox_calendarSource
             // 
@@ -128,6 +123,8 @@
             this.comboBox_calendarSource.Name = "comboBox_calendarSource";
             this.comboBox_calendarSource.Size = new System.Drawing.Size(157, 21);
             this.comboBox_calendarSource.TabIndex = 1;
+            this.comboBox_calendarSource.Visible = false;
+            this.comboBox_calendarSource.SelectedIndexChanged += new System.EventHandler(this.comboBox_calendarSource_SelectedIndexChanged);
             // 
             // button_readCalendar
             // 
@@ -136,8 +133,9 @@
             this.button_readCalendar.Name = "button_readCalendar";
             this.button_readCalendar.Size = new System.Drawing.Size(107, 32);
             this.button_readCalendar.TabIndex = 7;
-            this.button_readCalendar.Text = "read calendar";
+            this.button_readCalendar.Text = "Read calendar";
             this.button_readCalendar.UseVisualStyleBackColor = true;
+            this.button_readCalendar.Visible = false;
             this.button_readCalendar.Click += new System.EventHandler(this.button_readCalendar_Click);
             // 
             // label2
@@ -156,9 +154,7 @@
             this.comboBox_locationSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_locationSource.FormattingEnabled = true;
             this.comboBox_locationSource.Items.AddRange(new object[] {
-            "OpenWeatherMap",
-            "OpenStreetMap",
-            "GeoNames"});
+            "OpenWeatherMap"});
             this.comboBox_locationSource.Location = new System.Drawing.Point(96, 8);
             this.comboBox_locationSource.Name = "comboBox_locationSource";
             this.comboBox_locationSource.Size = new System.Drawing.Size(157, 21);

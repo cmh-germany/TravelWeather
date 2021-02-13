@@ -7,13 +7,13 @@ namespace TravelWeather
     public delegate void ChangedEventHandler(object sender, EventArgs e);
     class director
     {
-        public enum locationFinderType {OpenWeatherMap=0, OpenStreetMap=1, GeoNames=2 };
-        public enum weatherSourceType {WeatherUnderground=0, OpenWeatherMap=1, TheWeatherChannel=2, WorldWeatherOnline=3, YahooWeather=4, WetterDotCom=5, yrDotNo=6 };
-        public enum calendarType { Google=0, iCalendar=1};
+        public enum locationFinderType { OpenWeatherMap = 0, OpenStreetMap = 1, GeoNames = 2 };
+        public enum weatherSourceType { WeatherUnderground = 0, OpenWeatherMap = 1, TheWeatherChannel = 2, WorldWeatherOnline = 3, YahooWeather = 4, WetterDotCom = 5, yrDotNo = 6 };
+        public enum calendarType { Google = 0, iCalendar = 1 };
 
         private CalendarBase _cal;
-        private Dictionary<DateTime,WeatherModel> _dateAndWeather;
-        
+        private Dictionary<DateTime, WeatherModel> _dateAndWeather;
+
         private locationFinderType _locationFinderSource;
         private calendarType _calendarSource;
         private weatherSourceType _weatherSource;
@@ -41,20 +41,6 @@ namespace TravelWeather
                 finder = new LocationFinderOpenWeatherMap(name);
                 finder.find();
                 return finder.getFirstLocation();
-            }
-            //OpenStreetMap
-            else if (_locationFinderSource == locationFinderType.OpenStreetMap)
-            {
-                //todo implement
-                System.Console.WriteLine("not yet implemented");
-                return null;
-            }
-            //GeoNames
-            else if (_locationFinderSource == locationFinderType.GeoNames)
-            {
-                //todo implement
-                System.Console.WriteLine("not yet implemented");
-                return null;
             }
             else
             {
@@ -84,7 +70,8 @@ namespace TravelWeather
                 CalendarReady(this, e);
         }
 
-        public void readCalendar(int type){
+        public void readCalendar(int type)
+        {
             if (type == 0)
             {
                 _cal = new CalendarGoogle();

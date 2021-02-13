@@ -43,11 +43,8 @@ namespace TravelWeather
                 XmlAttributeCollection cityAttributes = city.Attributes;
                 Location loc = new Location(city.Attributes["name"].Value, country.InnerText, int.Parse(city.Attributes["id"].Value), "OpenWeatherMap", double.Parse(coord.Attributes["lon"].Value), double.Parse(coord.Attributes["lat"].Value));
                 this.possibleLocations.Add(loc);
-                //loc.toString();
-                //Console.WriteLine(city["coord"].Attributes["lon"].Value);
             }
 
-            //int numberOfFoundCities = (int)Double.Parse(listOfCities.Item(0)["count"].InnerText);
         }
     }
 }

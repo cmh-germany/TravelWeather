@@ -16,10 +16,10 @@ namespace TravelWeather
 
         public WeatherModel(string s, double t, double c, double p)
         {
-           weatherServiceSource = s;
-           temperature = t;
-           cloudyness = c;
-           precipitation = p;
+            weatherServiceSource = s;
+            temperature = t;
+            cloudyness = c;
+            precipitation = p;
         }
 
         public WeatherModel(string s, double t1, double t2, double c, double p, string pt)

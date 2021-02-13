@@ -4,11 +4,12 @@ namespace TravelWeather
 {
     class Location
     {
-        private string cityName;
-        private string countryName;
-        private int id;
+        public string cityName { get; }
+        public string countryName;
+        public int id { get; }
         private string idSource;
-        double latitude, longitude;
+        public double latitude { get; }
+        public double longitude { get; }
 
         public Location()
         {
@@ -51,9 +52,6 @@ namespace TravelWeather
 
         private void init()
         {
-            this.cityName = countryName = idSource = "";
-            this.id = -1;
-            this.latitude = this.longitude = 0.0;
         }
 
     }

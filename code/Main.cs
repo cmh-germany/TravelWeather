@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,9 +17,6 @@ using System.Windows.Forms;
 
 namespace TravelWeather
 {
-    // A delegate type for hooking up change notifications.
-    //public delegate void ChangedEventHandler(object sender, EventArgs e);
-
     public partial class FormMain : Form
     {
         private director aDirector;
@@ -33,15 +28,13 @@ namespace TravelWeather
         private List<Label> temperatureMinLabelList = new List<Label>();
         private List<Label> temperatureMaxLabelList = new List<Label>();
         private List<Label> cloudynessLabelList = new List<Label>();
-        private List<Label> precipitationLabelList  = new List<Label>();
+        private List<Label> precipitationLabelList = new List<Label>();
         private List<String> tableRowCaptions;
         private TableLayoutPanel tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-        
-        const int daysForecast=7;
 
-        private Dictionary<string, string> weatherSymbol;
+        const int daysForecast = 7;
 
-        private BackgroundWorker _worker;   
+        private Dictionary<string, Image> weatherSymbol;
 
 
         public FormMain()
@@ -68,22 +61,6 @@ namespace TravelWeather
 
         }
 
-        //private void retrieveWeatherOpenWeatherMap()
-        //{
-        //    toolStripStatusLabel.Text = "Loading Weather information...";
-        //    //for every date
-        //    for (int i = 0; i < locationTextBoxList.Count; i++)
-        //    {
-        //        //Determine location/resolve ambiguities
-        //        //Location curLoc = new Location(locationTextBoxList.ElementAt(i).Text);
-        //        //_worker.RunWorkerAsync(locationTextBoxList.ElementAt(i).Text);
-
-        //        displayWeatherInGUI(i);
-        //    }
-    
-        //    toolStripStatusLabel.Text = "Weather information is displayed";
-        //    toolStripProgressBar.Value = 0;
-        //}
 
         private void displayWeather(int column, WeatherModel wm)
         {
@@ -154,14 +131,14 @@ namespace TravelWeather
                 this.tableLayoutPanelMain.Controls.Add(captionCur, 0, i);
             }
 
-            for (int i = 1; i < daysForecast+1; i++)
+            for (int i = 1; i < daysForecast + 1; i++)
             {
-                dateList.Add(DateTime.Today.AddDays(i-1));
+                dateList.Add(DateTime.Today.AddDays(i - 1).AddHours(12));
 
                 CreateAndAddLabelToList(dateList.Last().ToString("ddd d MMM"), dateLabelList);
 
                 TextBox lLoc = new TextBox();
-                lLoc.Text = locationDefault.ElementAt(i-1);
+                lLoc.Text = locationDefault.ElementAt(i - 1);
                 locationTextBoxList.Add(lLoc);
 
                 PictureBox pWeather = new PictureBox();
@@ -201,12 +178,12 @@ namespace TravelWeather
             CalendarBase cal = this.aDirector.getCalendar();
             if (cal.wasLoad())
             {
-                DateTime cur = new DateTime(2013, 7, 10);
+                DateTime cur = DateTime.Today;
                 for (int i = 0; i < daysForecast; i++)
                 {
                     //Console.WriteLine(cur);
                     string curLocation = cal.getLocation(cur);
-                    
+
                     if (curLocation != "-1")
                         locationTextBoxList.ElementAt(i).Text = cal.getLocation(cur);
                     else
@@ -228,20 +205,18 @@ namespace TravelWeather
         private void button_readCalendar_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not yet implemented");
-            //aDirector.readCalendar(comboBox_calendarSource.SelectedIndex);
-
         }
 
         private Dictionary<DateTime, String> getManualLocations()
         {
-            Dictionary<DateTime, String> dateAndLocation = new Dictionary<DateTime,string>();
+            Dictionary<DateTime, String> dateAndLocation = new Dictionary<DateTime, string>();
             if (locationTextBoxList.Count == dateList.Count)
             {
                 for (int i = 0; i < locationTextBoxList.Count; i++)
                 {
-                    dateAndLocation.Add(dateList.ElementAt(i),locationTextBoxList.ElementAt(i).Text);
+                    dateAndLocation.Add(dateList.ElementAt(i), locationTextBoxList.ElementAt(i).Text);
                 }
-                
+
             }
             else
             {
@@ -252,32 +227,19 @@ namespace TravelWeather
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            comboBox_weatherSource.SelectedIndex = 1;
+            comboBox_weatherSource.SelectedIndex = 0;
             comboBox_calendarSource.SelectedIndex = 0;
             comboBox_locationSource.SelectedIndex = 0;
-            this.initialize(); 
+            this.initialize();
         }
 
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
 
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        private void comboBox_calendarSource_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-
-        }
-
-        private void button_Options_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Not yet implemented");
-        }
-
-  
     }
 }
