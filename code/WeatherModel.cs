@@ -31,16 +31,6 @@ namespace TravelWeather
             precipitationType = pt;
         }
 
-        public string getPrecipitationString()
-        {
-                if (this.precipitation > 0)
-                {
-                    string precipitationString = precipitation.ToString() + " mm (" + precipitationType + ")";
-                    return precipitationString;
-                }
-                return "none";
-        }
-
         /// <summary>
         ///  Returns weather as string for specific day
         /// </summary>
