@@ -61,28 +61,11 @@ namespace TravelWeather
 
         }
 
-
         private void displayWeather(int column, WeatherModel wm)
         {
-            //int progress = (int)((double)i * 100 / (double)locationTextBoxList.Count);
-            //toolStripProgressBar.Value = progress;
-            //Console.WriteLine(progress);
-            //DateTime cur = dateList.ElementAt(0);
+            weatherPictureBoxList.ElementAt(column).Image = weatherSymbol[wm.getWeatherString()];
+            weatherPictureBoxList.ElementAt(column).SizeMode = PictureBoxSizeMode.Zoom;
 
-                string weatherSymbolName = "";
-                if (weatherSymbol.TryGetValue(wm.getWeatherString(), out weatherSymbolName))
-                {
-                    if (File.Exists(weatherSymbolName))
-                    {
-                        Image image = Image.FromFile(weatherSymbolName);
-                        weatherPictureBoxList.ElementAt(column).Image = image;
-                        weatherPictureBoxList.ElementAt(column).SizeMode = PictureBoxSizeMode.Zoom;
-                    }
-                    else
-                        MessageBox.Show("weather sybol file not found for " + weatherSymbolName);
-                }
-                else
-                    MessageBox.Show("no weather symbol for " + weatherSymbolName);
 
                 temperatureMinLabelList.ElementAt(column).Text = wm.temperatureMin.ToString("N0") + " °C";
                 temperatureMaxLabelList.ElementAt(column).Text = wm.temperatureMax.ToString("N0") + " °C";
@@ -159,10 +142,13 @@ namespace TravelWeather
                 this.tableLayoutPanelMain.Controls.Add(this.precipitationLabelList.Last(), i, row++);
             }
 
-            weatherSymbol = new Dictionary<string,string>(){
-                {"sunny", "images/sunny.png"},
-                 {"cloudySun", "images/cloudySun.png"},
-                  {"rainy", "images/rainy.png"}
+            weatherSymbol = new Dictionary<string, Image>(){
+                {"sunny", global::TravelWeather.Properties.Resources.sunny},
+                 {"cloudySun", global::TravelWeather.Properties.Resources.sunnyAndClouds},
+                  {"rainy", global::TravelWeather.Properties.Resources.rain},
+                  {"cloudy", global::TravelWeather.Properties.Resources.cloudy},
+                   {"snowy", global::TravelWeather.Properties.Resources.snow},
+                   {"thunderstorm", global::TravelWeather.Properties.Resources.thunderstorm}
             };
         }
 
